@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="topnav">
+        <a id="logo" class="nav-link" href="main.html">MAIN</a>
+        <a class="nav-link" href="register.html">Register</a>
+        <a class="nav-link" href="login.html">Login</a>
+        <a class="nav-link" href="crypto-chart.html">Crypto</a>
+        <a class="nav-link" href="population-chart.html">Population</a>
+        <a class="nav-link" href="finance.html">Stock</a>
+    </nav>
+    <form action="/register" method="post" class="form-container">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <input type="email" placeholder="email" name="email" required>
+        <input type="text" placeholder="First Name" name="firstName">
+        <input type="text" placeholder="Last Name" name="lastName">
+        <input type="number" placeholder="Age" name="age">
+        <input type="text" placeholder="Country" name="country">
+        <select name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <button type="submit">Register</button>
+        <p class="switch-form">Already have an account? <a href="/login">Log in</a></p>
+    </form>
+
+    <script src="session.js"></script>
+    <footer>Sultan Abdukarimov SE-2211</footer>
+</body>
+</html>

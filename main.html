@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="topnav">
+        <a id="logo" class="nav-link" href="main.html">MAIN</a>
+        <a class="nav-link" href="register.html">Register</a>
+        <a class="nav-link" href="login.html">Login</a>
+        <a class="nav-link" href="crypto-chart.html">Crypto</a>
+        <a class="nav-link" href="population-chart.html">Population</a>
+        <a class="nav-link" href="finance.html">Stock</a>
+    </nav>
+    
+    <div id="itemsContainer" class="items-container"></div>
+
+
+    <div id="itemsContainer"></div> <!-- Контейнер для карточек -->
+
+    <footer>Sultan Abdukarimov SE-2211</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        fetch('/items')
+            .then(response => response.json())
+            .then(items => {
+                const container = document.getElementById('itemsContainer');
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <img src="" alt="${item.name}" class="item-image">
+                    `;
+                    container.appendChild(card);
+                    initImageCarousel(card.querySelector('.item-image'), item.images);
+                });
+            })
+            .catch(error => console.error('Error loading items:', error));
+    });
+
+    function initImageCarousel(imageElement, images) {
+        let currentImageIndex = 0;
+        imageElement.src = images[currentImageIndex];
+        
+        setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            imageElement.src = images[currentImageIndex];
+        }, 3000); // Меняем изображение каждые 5 секунд
+    }
+    </script>
+
+
+<script src="session.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="topnav">
+        <a id="logo" class="nav-link" href="main.html">MAIN</a>
+        <a class="nav-link" href="register.html">Register</a>
+        <a class="nav-link" href="login.html">Login</a>
+        <a class="nav-link" href="crypto-chart.html">Crypto</a>
+        <a class="nav-link" href="population-chart.html">Population</a>
+        <a class="nav-link" href="finance.html">Stock</a>
+    </nav>
+    
+    <div class="form-container">
+        <h2>Add New Item</h2>
+        <form action="/admin/add-item" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Name" name="name" required>
+            <textarea placeholder="Description" name="description" required></textarea>
+            <input type="file" name="images" accept="image/*">
+            <input type="file" name="images" accept="image/*">
+            <input type="file" name="images" accept="image/*">
+
+            <button type="submit">Create</button>
+        </form>
+
+        <h2>Update Item</h2>
+        <form action="/admin/update-item" method="post">
+            <input name="id" placeholder="element id" required>
+            <input type="text" placeholder="Name" name="name" required>
+            <textarea placeholder="Description" name="description" required></textarea>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+<div id="itemsTable"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/admin/items')
+            .then(response => response.json())
+            .then(items => {
+                const table = document.createElement('table');
+                table.innerHTML = '<tr><th>Id</th><th>Name</th><th>Description</th><th>Actions</th></tr>';
+                items.forEach(item => {
+                    const row = table.insertRow();
+                    row.insertCell().textContent = item._id;
+                    row.insertCell().textContent = item.name;
+                    row.insertCell().textContent = item.description;
+                    const deleteCell = row.insertCell();
+                    const deleteForm = document.createElement('form');
+                    deleteForm.action = '/admin/delete-item';
+                    deleteForm.method = 'post';
+                    deleteForm.innerHTML = `<input type="hidden" name="id" value="${item._id}"><button type="submit">Delete</button>`;
+                    deleteCell.appendChild(deleteForm);
+                });
+                document.getElementById('itemsTable').appendChild(table);
+            });
+    });
+</script>
+    
+<footer>Sultan Abdukarimov SE-2211</footer>
+<script src="session.js"></script>
+</body>
+</html>
